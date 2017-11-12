@@ -39,15 +39,15 @@
 
 			$sql = "select * from userT order by id";
 			// $result = mysql_query($sql,$link) or die(mysql_error());
-
+			$res = $mysqli->query($sql);
 			// while($rows = mysql_fetch_array($result))
 			while($row = $res->fetch_assoc())
 			{							//循环显示成员信息
 				$id = $row["id"];
-				$username = $row["username"];
-				$password = $row["password"];
+				$username = $row["userName"];
+				$password = $row["passWord"];
 				$authority = $row["authority"];
-				$identity = $row["identity"];
+				$identity = $row["isStudent"];
 
 				// $username = iconv('GBK','UTF-8',$username);
 				// $password = iconv('GBK','UTF-8',$password);

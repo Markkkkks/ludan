@@ -59,8 +59,11 @@
 
 			// $sql = "select * from b_ludan where l_isFinish = 0 order by l_time desc limit $s,$count";
 			// $result = @mysql_query($sql,$link);
-			$sql = "select top $count * from $table_mark where isFinish = 0
-						and id not in(select top $s id from $table_mark order by mendTime desc) order by mendTime desc";
+			// $sql = "select top $count * from $table_mark where isFinish = 0
+			// 			and id not in(select top $s id from $table_mark order by mendTime desc) order by mendTime desc";
+			$sql = 	"select * from $table_mark where  isFinish = 0
+			ORDER BY mendtime DESC limit ".($page-1)*20 .", $count
+			";		
 			// $result = odbc_exec($conn, $sql);
 			$result = $mysqli->query($sql);
 

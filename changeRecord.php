@@ -12,7 +12,7 @@
 		// $query = "delete from b_ludan where l_roomNum ='1231' and l_time = '2015-11-26 00:59:46'";
 
 		// $result = @mysql_query($query, $link);
-		$result = @odbc_exec($conn, $query);
+		$result = $mysqli->query($query);
 		if($result)
 		{
 			echo "var del=1"; 

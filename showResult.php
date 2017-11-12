@@ -65,7 +65,7 @@
 		else
 		{
 			$count = 20;															//每页显示的成员数
-			$p_count = ceil($nums/$count);
+			$p_count = ceil($nums/$count);									//向上取证为页数
 
 			if ($_GET['page'] == 0 && !$_GET['page'])
 			{								//未选择显示页数
@@ -89,43 +89,59 @@
 			{
 				// $sql = "select * from mark where room = '$room' and discribe LIKE '%".$discribe."%'
 				//  and solution LIKE '%".$solution."%' and cost LIKE '%".$cost."%' and isFinish = '$isFinish' order by l_time desc limit $s,$count";
-				$sql = "select top $count * from $table_mark where room LIKE '%".$room."%' and reportText LIKE '%".$discribe."%'
-					and mendText LIKE '%".$solution."%' and cost LIKE '%".$cost."%' and isFinish = '$isFinish'
-					and id not in(select top $s id from $table_mark where room LIKE '%".$room."%' and reportText LIKE '%".$discribe."%'
-					and mendText LIKE '%".$solution."%' and cost LIKE '%".$cost."%' and isFinish = '$isFinish' order by mendTime desc) 
-						order by mendTime desc";	
+				// $sql = "select top $count * from $table_mark where room LIKE '%".$room."%' and reportText LIKE '%".$discribe."%'
+				// 	and mendText LIKE '%".$solution."%' and cost LIKE '%".$cost."%' and isFinish = '$isFinish'
+				// 	and id not in(select top $s id from $table_mark where room LIKE '%".$room."%' and reportText LIKE '%".$discribe."%'
+				// 	and mendText LIKE '%".$solution."%' and cost LIKE '%".$cost."%' and isFinish = '$isFinish' order by mendTime desc) 
+				// 		order by mendTime desc";
+				$sql = 	"select * from $table_mark where room LIKE '%".$room."%' and reportText LIKE '%".$discribe."%'
+				and mendText LIKE '%".$solution."%' and cost LIKE '%".$cost."%' and isFinish = '$isFinish' 
+				ORDER BY mendtime DESC limit ".($page-1)*20 .", $count
+				";	
 			}
 			else if($room && $isFinish == 2)
 			{
 				// $sql = "select * from $table_ld where l_roomNum = '$room' and l_discribe LIKE '%".$discribe."%'
 				//  and l_solution LIKE '%".$solution."%' and l_cost LIKE '%".$cost."%' order by l_time desc limit $s,$count";	
-				$sql = "select top $count * from $table_mark where room LIKE '%".$room."%' and reportText LIKE '%".$discribe."%'
-					and mendText LIKE '%".$solution."%' and cost LIKE '%".$cost."%'
-					and id not in(select top $s id from $table_mark where room LIKE '%".$room."%' and reportText LIKE '%".$discribe."%'
-					and mendText LIKE '%".$solution."%' and cost LIKE '%".$cost."%' order by mendTime desc) 
-						order by mendTime desc";	
+				// $sql = "select top $count * from $table_mark where room LIKE '%".$room."%' and reportText LIKE '%".$discribe."%'
+				// 	and mendText LIKE '%".$solution."%' and cost LIKE '%".$cost."%'
+				// 	and id not in(select top $s id from $table_mark where room LIKE '%".$room."%' and reportText LIKE '%".$discribe."%'
+				// 	and mendText LIKE '%".$solution."%' and cost LIKE '%".$cost."%' order by mendTime desc) 
+				// 		order by mendTime desc";	
+				
+				$sql = "select * from $table_mark where room LIKE '%".$room."%' and reportText LIKE '%".$discribe."%'
+					and mendText LIKE '%".$solution."%' and cost LIKE '%".$cost."%' ORDER BY mendtime DESC limit ".($page-1)*20 .", $count
+					";	
 			}
 			else if($room == NULL && $isFinish != 2)
 			{
-				$sql = "select top $count * from $table_mark where reportText LIKE '%".$discribe."%'
-					and mendText LIKE '%".$solution."%' and cost LIKE '%".$cost."%' and isFinish = '$isFinish'
-					and id not in(select top $s id from $table_mark where reportText LIKE '%".$discribe."%'
-					and mendText LIKE '%".$solution."%' and cost LIKE '%".$cost."%' order by mendTime desc) 
-						order by mendTime desc";		
+				// $sql = "select top $count * from $table_mark where reportText LIKE '%".$discribe."%'
+				// 	and mendText LIKE '%".$solution."%' and cost LIKE '%".$cost."%' and isFinish = '$isFinish'
+				// 	and id not in(select top $s id from $table_mark where reportText LIKE '%".$discribe."%'
+				// 	and mendText LIKE '%".$solution."%' and cost LIKE '%".$cost."%' order by mendTime desc) 
+				// 		order by mendTime desc";		
+				$sql = "select * from $table_mark where reportText LIKE '%".$discribe."%'
+				and mendText LIKE '%".$solution."%' and cost LIKE '%".$cost."%' and isFinish = '$isFinish' 
+				ORDER BY mendtime DESC limit ".($page-1)*20 .", $count
+				";	
 			}
 			else if($room == NULL && $isFinish == 2)
 			{
-				$sql = "select top $count * from $table_mark where reportText LIKE '%".$discribe."%'
-					and mendText LIKE '%".$solution."%' and cost LIKE '%".$cost."%'
-					and id not in(select top $s id from $table_mark where reportText LIKE '%".$discribe."%'
-					and mendText LIKE '%".$solution."%' and cost LIKE '%".$cost."%' order by mendTime desc) 
-						order by mendTime desc";
+				// $sql = "select top $count * from $table_mark where reportText LIKE '%".$discribe."%'
+				// 	and mendText LIKE '%".$solution."%' and cost LIKE '%".$cost."%'
+				// 	and id not in(select top $s id from $table_mark where reportText LIKE '%".$discribe."%'
+				// 	and mendText LIKE '%".$solution."%' and cost LIKE '%".$cost."%' order by mendTime desc) 
+				// 		order by mendTime desc";
+				$sql = "select * from $table_mark where   reportText LIKE '%".$discribe."%'
+				and mendText LIKE '%".$solution."%' and cost LIKE '%".$cost."%' and isFinish = '$isFinish' 
+				ORDER BY mendtime DESC limit ".($page-1)*20 .", $count
+				";	
 			}
 			// $sql = "select * from b_ludan where l_isFinish = 1 order by l_time desc limit $s,$count";
 			// $result = mysql_query($sql,$link) or die(mysql_error());
 			$result = $mysqli->query($sql);
 
-			while($row = $res->fetch_assoc())
+			while($row = $result->fetch_assoc())
 			{							//循环显示成员信息
 				$id = $row["id"];
 				$room = $row["room"];

@@ -49,7 +49,7 @@
 			// $discribe = iconv("utf-8", "gbk", $discribe);
 			// $solution = iconv("utf-8", "gbk", $solution);
 			// $cost = iconv("utf-8", "gbk", $cost);
-			$query="INSERT INTO $table_mark VALUES($roomNum, getdate(), '$memberFix', '$memberLD', '$type', '$discribe', '$solution', '$cost', $isFinish)";
+			$query="INSERT INTO $table_mark(room,mendTime,mender,marker,`type`,reportText,mendText,cost,isFinish) VALUES($roomNum, NOW(), '$memberFix', '$memberLD', '$type', '$discribe', '$solution', '$cost', $isFinish)";
 			// mysql_query($query, $link);
 			// $re = odbc_exec($conn, $query);
 			$re = $mysqli->query($query);

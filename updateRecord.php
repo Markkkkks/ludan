@@ -8,10 +8,10 @@
 
 	$query = "SELECT * FROM $table_mark WHERE id = '$id'";
 	// $result = mysql_query($query, $link);
-	$result = $mysqli->query($sql);
+	$result = $mysqli->query($query);
 
 	// $row = mysql_fetch_array($result);
-	$row = $res->fetch_assoc();
+	$row = $result->fetch_assoc();
 
 	// $room = $row['l_roomNum'];
 	// $time = $row['l_time'];

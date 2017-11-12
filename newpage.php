@@ -105,7 +105,7 @@
 
 										// while($rows = mysql_fetch_array($result))
 										// while(odbc_fetch_row($result))
-										while($row = $res->fetch_assoc())
+										while($row = $result->fetch_assoc())
 										{
 											
 											// $name = odbc_result($result, "name");
@@ -143,7 +143,7 @@
 										// $result = @odbc_exec($conn, $sql);
 										$result = $mysqli->query($sql);
 										// while(odbc_fetch_row($result))
-										while($row = $res->fetch_assoc())
+										while($row = $result->fetch_assoc())
 										{
 											// $name = odbc_result($result, "name");
 											$name = $row["name"];
@@ -161,7 +161,7 @@
 										// $result = @odbc_exec($conn, $sql);
 										$result = $mysqli->query($sql);
 										// while(odbc_fetch_row($result))
-										while($row = $res->fetch_assoc())
+										while($row = $result->fetch_assoc())
 										{
 											// $name = odbc_result($result, "name");
 											$name = $row["name"];

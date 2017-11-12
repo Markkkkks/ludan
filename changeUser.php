@@ -27,7 +27,7 @@
 			$query = "update $table_user set userName='$username', password='$password', isStudent='$identity',
 				authority=$authority where id='$id'";
 			// $result = @mysql_query($query, $link);
-			$result = @odbc_exec($conn, $query);
+			$result = $mysqli->query($query);
 			if($result)
 			{
 				echo "var change=1";

@@ -55,12 +55,15 @@
 			$s = ($page-1)*$count ;
 			
 
-			$sql = "select top $count * from $table_mark where isFinish = 1
-						and id not in(select top $s id from $table_mark where isFinish = 1 order by mendTime desc) order by mendTime desc";
+			// $sql = "select top $count * from $table_mark where isFinish = 1
+			// 			and id not in(select top $s id from $table_mark where isFinish = 1 order by mendTime desc) order by mendTime desc";
+			$sql = 	"select * from $table_mark where  isFinish = 1
+			ORDER BY mendtime DESC limit ".($page-1)*20 .", $count
+			";	
 			$result = $mysqli->query($sql);
 
 			// while($rows = mysql_fetch_array($result))
-			while($row = $res->fetch_assoc())
+			while($row = $result->fetch_assoc())
 			{							//循环显示成员信息
 				$id = $row["id"];
 				$room = $row["room"];

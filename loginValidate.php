@@ -26,11 +26,12 @@
 		$res = $mysqli->query($query);	
 		
 		// if(odbc_fetch_row($result))
-		if($res)
+		$row = $res->fetch_assoc();
+		if($row!= null)
 		{
 			// $isStu = odbc_result($result, "isStudent");
 
-			$row = $res->fetch_assoc();
+			// $row = $res->fetch_assoc();
 			$isStu = $row["isStudent"];
 
 			$correct = 1;	//非学生小组成员用户，可直接登陆

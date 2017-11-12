@@ -17,7 +17,7 @@
 
 		// $nums = mysql_num_rows($result);
 		// $nums = @odbc_num_rows($result);											//成员总数
-		$nums == $result->num_rows;
+		$nums = $result->num_rows;
 		$stuNumber = "m_number";												//假定表中学号 属性名为　 $stuNumber
 
 		echo "<table width=\"95%\" cellpadding=\"1\" align=\"center\" bgcolor=\"#FFFFFF\" class=\"gridtable\">";
@@ -79,14 +79,17 @@
 			
 
 			// $sql = "select * from $table_member order by m_state, m_number limit $s,$count";
-			$sql = "select top $count * from $table_member where id not in 
-				(select top $s id from $table_member order by id) order by id";
+			// $sql = "select top $count * from $table_member where id not in 
+			// 	(select top $s id from $table_member order by id) order by id";
+			$sql = "select  * from $table_member 
+			 order by id limit ".($page-1)*10 .", $count
+			";
 			// $result = @mysql_query($sql,$link);
 			$result= $mysqli->query($sql);
 
 			// while($rows = mysql_fetch_array($result))
 			// while(odbc_fetch_row($result))
-			while($row = $res->fetch_assoc())
+			while($row = $result->fetch_assoc())
 			{							//循环显示成员信息
 				$id = $row["id"];
 				$name = $row["name"];

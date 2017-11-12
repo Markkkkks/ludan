@@ -78,6 +78,7 @@
 			// $sql = "select * from $table_member order by m_state, m_number limit $s,$count";
 			$sql = "select top $count * from $table_memLeave where id not in 
 				(select top $s id from $table_memLeave order by id desc) order by id desc";
+				$sql = "select  * from $table_memLeave order by id desc limit ".($page-1)*10 .", $count";
 			// $result = @mysql_query($sql,$link);
 			$result = $mysqli->query($sql);
 

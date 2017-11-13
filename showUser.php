@@ -55,7 +55,10 @@
 				echo "<tr>";
 				echo "<td>".$id."</td>";
 				echo "<td>".$username."</td>";
-				echo "<td>".$password."</td>";
+				
+				echo "<td>"."*********************************"."</td>";
+				// echo "<td>".$password."</td>";
+				
 
 				if($identity == 0)
 				{

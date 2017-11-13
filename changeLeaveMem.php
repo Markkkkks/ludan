@@ -53,7 +53,7 @@
 				$query = "update $table_memLeave set name='$name',hometown='$hometown',grade='$grade',profession='$profession',timeIn='$timeIn',timeOut='$timeOut',contact='$contact', graduateWork='$graduateWork',
 				offer='$offer' where id='$id'";
 				// $result = @mysql_query($query, $link);
-				$result = @odbc_exec($conn, $query);
+				$result = $mysqli->query($query);
 				if($result)
 				{
 					echo "var change=1";
@@ -76,7 +76,7 @@
 			
 				$query = "insert into $table_memLeave VALUES ('$id', '$name', '$hometown', '$grade', '$profession', '$timeIn', '$timeOut', '$contact',
 					'$graduateWork', '$offer','$comment')";
-				$result = @odbc_exec($conn, $query);
+				$result = $mysqli->query($query);
 				if($result)
 				{
 					echo "var add=1";
@@ -93,9 +93,12 @@
 		$id = $_POST['id'];
 		$sql = "select name, comment from $table_memLeave where id='$id'";
 
-		$result = @odbc_exec($conn, $sql);
-		$name = odbc_result($result, "name");
-		$comment = odbc_result($result, "comment");
+		$result = $mysqli->query($sql);
+		$row = $result->fetch_assoc();
+		// $name = odbc_result($result, "name");
+		// $comment = odbc_result($result, "comment");
+		$name = $row["name"];
+		$comment = $row["comment"];
 		// $name = iconv("gbk", "utf-8", $name);
 		// $comment = iconv("gbk", "utf-8", $comment);
 		if($comment == null || $comment == "")
@@ -115,7 +118,7 @@
 		else
 		{
 			$sql = "update $table_memLeave set comment = '$comment' where id = '$id'";
-			$result = @odbc_exec($conn, $sql);
+			$result = $mysqli->query($sql);
 			if($result)
 				echo "var edit=1";
 			else
@@ -127,7 +130,7 @@
 		$id = $_POST['id'];
 
 		$query = "delete from $table_memLeave where id='$id'";
-		$result = @odbc_exec($conn, $query);
+		$result = $mysqli->query($query);
 		if($result)
 		{
 			echo "var del=1";

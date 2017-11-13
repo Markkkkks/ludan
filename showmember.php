@@ -57,7 +57,7 @@
 		else
 		{
 			$count = 10;															//每页显示的成员数
-			$p_count = ceil($nums/$count);
+ 			$p_count = ceil($nums/$count);
 
 			if ($_GET['page'] == 0 && !$_GET['page'])
 			{								//未选择显示页数

@@ -58,7 +58,7 @@
 		else{
 		$query = "update $table_member set name='$name',hometown='$hometown',grade='$grade',profession='$profession',job='$job',state='$state',timeIn='$timeIn' where id='$id'";
 		// $result = @mysql_query($query, $link);
-		$result = @odbc_exec($conn, $query);
+		$result = $mysqli->query($query);
 		if($result)
 		{
 			echo "var change=1";
@@ -79,7 +79,7 @@
 			// $query = "insert into $table_member(`m_number`, `m_name`, `m_address`, `m_grade`, `m_project`, `m_job`, `m_state`, `m_timeJoin`, `m_timeLeave`) VALUES ('$number', '$name', '$address', '$grade', '$project', '$job', '$state', '$timeJoin', '$timeLeave')";
 			$query = "insert into $table_member VALUES ('$id', '$name', '$hometown', '$grade', '$profession', '$job', '$state', '$timeIn')";
 		// $result = @mysql_query($query, $link);
-			$result = @odbc_exec($conn, $query);
+			$result = $mysqli->query($query);
 			if($result)
 			{
 				echo "var add=1";
@@ -90,7 +90,7 @@
 			}
 		}
 		$query = "insert into $table_user VALUES ('$id', '8505230', 1, 1)";
-		$result = @odbc_exec($conn, $query);
+		$result = $mysqli->query($query);
 		}//tianjia 
 	}
 	elseif($_POST['method'] == 2)
@@ -121,7 +121,7 @@
 
 		$sql = "insert into $table_memLeave VALUES('$id', '$name', '$hometown','$grade','$profession','$timeIn',
 			'$timeOut','$contact','$graduateWork','$offer','$comment')";
-		$result = @odbc_exec($conn, $sql);
+		$result = $mysqli->query($sql);
 		if(!$result)
 		{
 			echo "var leave = 0";
@@ -129,14 +129,14 @@
 		else
 		{
 			$sql = "delete from $table_member where id='$id'";
-			$result = @odbc_exec($conn, $sql);
+			$result = $mysqli->query($sql);
 			if(!$result)
 				echo "var leave = 0";
 			else
 				echo "var leave = 1";
 		}
 		$query = "delete from $table_user where userName='$id'";
-		$result = @odbc_exec($conn, $query);
+		$result = $mysqli->query($query);
 	}
 
 	else{				//否则处理删除操作
@@ -149,7 +149,7 @@
 	// $query = "update $table_member set m_name='3333333333' where m_number='$name'";
 	$query = "delete from $table_member where id='$id'";
 	// $result = @mysql_query($query, $link);
-	$result = @odbc_exec($conn, $query);
+	$result = $mysqli->query($query);
 	if($result)
 	{
 		echo "var cut=1";
@@ -159,7 +159,7 @@
 		echo "var cut=0";
 	}
 	$query = "delete from $table_user where userName='$id'";
-	$result = @odbc_exec($conn, $query);
+	$result = $mysqli->query($query);
 
 }
 

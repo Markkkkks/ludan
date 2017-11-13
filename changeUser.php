@@ -41,9 +41,9 @@
 		{				//添加成员信息
 			// $query = "insert into $table_user VALUES($id, '$username',md5('$password'),$authority)";
 			$password= my_XOR($password);
-			$query = "insert into $table_user VALUES('$username','$password',$authority, $identity)";
+			$query = "insert into $table_user(userName,passWord,authority,isStudent) VALUES('$username','$password',$authority, $identity)";
 			// $result = @mysql_query($query, $link);
-			$result = @odbc_exec($conn, $query);
+			$result =$mysqli->query($query);
 			if($result)
 			{
 				echo "var add=1";
@@ -60,7 +60,7 @@
 
 		// $query = "update $table_member set m_name='3333333333' where m_number='$name'";
 		$query = "delete from $table_user where id='$id'";
-		$result = @odbc_exec($conn, $query);
+		$result =$mysqli->query($query);
 		if($result)
 		{
 			echo "var cut=1"; 
